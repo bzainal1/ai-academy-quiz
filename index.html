@@ -69,12 +69,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: titleGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            from { filter: drop-shadow(0 0 5px rgba(0, 41, 145, 0.3)); }
-            to { filter: drop-shadow(0 0 15px rgba(0, 41, 145, 0.6)); }
         }
 
         .header p {
@@ -135,14 +129,16 @@
 
         .question-container {
             margin-bottom: 35px;
+            display: none;
             opacity: 0;
             animation: questionSlideIn 0.5s ease forwards;
         }
 
-        .question-container:nth-child(2) { animation-delay: 0.1s; }
-        .question-container:nth-child(3) { animation-delay: 0.2s; }
-        .question-container:nth-child(4) { animation-delay: 0.3s; }
-        .question-container:nth-child(5) { animation-delay: 0.4s; }
+        .question-container.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         @keyframes questionSlideIn {
             to {
@@ -225,23 +221,6 @@
             0% { transform: translateX(15px) scale(1.05); }
             50% { transform: translateX(15px) scale(1.08); }
             100% { transform: translateX(15px) scale(1.05); }
-        }
-
-        .point-badge {
-            display: inline-block;
-            background: rgba(0, 41, 145, 0.1);
-            color: #002991;
-            font-weight: bold;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-left: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .option input[type="radio"]:checked + label .point-badge {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
         }
 
         .results {
@@ -429,135 +408,135 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressBar"></div>
                 </div>
-                <div class="progress-text" id="progressText">Ready to start? Answer the questions below! 🚀</div>
+                <div class="progress-text" id="progressText">Ready to start? Answer the questions below!</div>
             </div>
 
-            <div class="question-container">
+            <div class="question-container active" id="question1">
                 <div class="question">1. How familiar are you with AI concepts?</div>
                 <div class="options">
                     <div class="option">
                         <input type="radio" name="q1" value="1" id="q1a">
-                        <label for="q1a">I'm brand new to AI. <span class="point-badge">1 point</span></label>
+                        <label for="q1a">I'm brand new to AI.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q1" value="2" id="q1b">
-                        <label for="q1b">I've dabbled a bit but don't use it regularly. <span class="point-badge">2 points</span></label>
+                        <label for="q1b">I've dabbled a bit but don't use it regularly.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q1" value="3" id="q1c">
-                        <label for="q1c">I'm comfortable with AI tools and want to build things. <span class="point-badge">3 points</span></label>
+                        <label for="q1c">I'm comfortable with AI tools and want to build things.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q1" value="4" id="q1d">
-                        <label for="q1d">I use AI to solve problems and design solutions. <span class="point-badge">4 points</span></label>
+                        <label for="q1d">I use AI to solve problems and design solutions.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q1" value="5" id="q1e">
-                        <label for="q1e">I'm highly skilled and want to pioneer advanced solutions. <span class="point-badge">5 points</span></label>
+                        <label for="q1e">I'm highly skilled and want to pioneer advanced solutions.</label>
                     </div>
                 </div>
             </div>
 
-            <div class="question-container">
+            <div class="question-container" id="question2">
                 <div class="question">2. How often do you use AI tools (ChatGPT, Claude, GitHub Copilot)?</div>
                 <div class="options">
                     <div class="option">
                         <input type="radio" name="q2" value="1" id="q2a">
-                        <label for="q2a">Rarely or never. <span class="point-badge">1 point</span></label>
+                        <label for="q2a">Rarely or never.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q2" value="2" id="q2b">
-                        <label for="q2b">Occasionally, for simple tasks. <span class="point-badge">2 points</span></label>
+                        <label for="q2b">Occasionally, for simple tasks.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q2" value="3" id="q2c">
-                        <label for="q2c">Regularly, to improve my work. <span class="point-badge">3 points</span></label>
+                        <label for="q2c">Regularly, to improve my work.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q2" value="4" id="q2d">
-                        <label for="q2d">Frequently, as part of projects or solutions. <span class="point-badge">4 points</span></label>
+                        <label for="q2d">Frequently, as part of projects or solutions.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q2" value="5" id="q2e">
-                        <label for="q2e">Daily, for advanced problem-solving or leadership. <span class="point-badge">5 points</span></label>
+                        <label for="q2e">Daily, for advanced problem-solving or leadership.</label>
                     </div>
                 </div>
             </div>
 
-            <div class="question-container">
+            <div class="question-container" id="question3">
                 <div class="question">3. What's your main goal with AI right now?</div>
                 <div class="options">
                     <div class="option">
                         <input type="radio" name="q3" value="1" id="q3a">
-                        <label for="q3a">Learn the basics and build awareness. <span class="point-badge">1 point</span></label>
+                        <label for="q3a">Learn the basics and build awareness.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q3" value="2" id="q3b">
-                        <label for="q3b">Save time and boost productivity. <span class="point-badge">2 points</span></label>
+                        <label for="q3b">Save time and boost productivity.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q3" value="3" id="q3c">
-                        <label for="q3c">Build prototypes and automate workflows. <span class="point-badge">3 points</span></label>
+                        <label for="q3c">Build prototypes and automate workflows.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q3" value="4" id="q3d">
-                        <label for="q3d">Scale AI to solve complex business challenges. <span class="point-badge">4 points</span></label>
+                        <label for="q3d">Scale AI to solve complex business challenges.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q3" value="5" id="q3e">
-                        <label for="q3e">Lead strategy and pioneer enterprise AI. <span class="point-badge">5 points</span></label>
+                        <label for="q3e">Lead strategy and pioneer enterprise AI.</label>
                     </div>
                 </div>
             </div>
 
-            <div class="question-container">
+            <div class="question-container" id="question4">
                 <div class="question">4. How confident are you applying AI at work?</div>
                 <div class="options">
                     <div class="option">
                         <input type="radio" name="q4" value="1" id="q4a">
-                        <label for="q4a">Not confident at all. <span class="point-badge">1 point</span></label>
+                        <label for="q4a">Not confident at all.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q4" value="2" id="q4b">
-                        <label for="q4b">A little confident—with guidance. <span class="point-badge">2 points</span></label>
+                        <label for="q4b">A little confident—with guidance.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q4" value="3" id="q4c">
-                        <label for="q4c">Confident to apply AI independently. <span class="point-badge">3 points</span></label>
+                        <label for="q4c">Confident to apply AI independently.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q4" value="4" id="q4d">
-                        <label for="q4d">Very confident—I design/lead AI solutions. <span class="point-badge">4 points</span></label>
+                        <label for="q4d">Very confident—I design/lead AI solutions.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q4" value="5" id="q4e">
-                        <label for="q4e">Extremely confident—I mentor/lead on AI strategy. <span class="point-badge">5 points</span></label>
+                        <label for="q4e">Extremely confident—I mentor/lead on AI strategy.</label>
                     </div>
                 </div>
             </div>
 
-            <div class="question-container">
+            <div class="question-container" id="question5">
                 <div class="question">5. Which statement sounds most like you?</div>
                 <div class="options">
                     <div class="option">
                         <input type="radio" name="q5" value="1" id="q5a">
-                        <label for="q5a">I want to understand what AI is and how it affects my role. <span class="point-badge">1 point</span></label>
+                        <label for="q5a">I want to understand what AI is and how it affects my role.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q5" value="2" id="q5b">
-                        <label for="q5b">I want to integrate AI into everyday tasks. <span class="point-badge">2 points</span></label>
+                        <label for="q5b">I want to integrate AI into everyday tasks.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q5" value="3" id="q5c">
-                        <label for="q5c">I want to create and customize AI solutions. <span class="point-badge">3 points</span></label>
+                        <label for="q5c">I want to create and customize AI solutions.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q5" value="4" id="q5d">
-                        <label for="q5d">I want to design AI solutions that solve big challenges. <span class="point-badge">4 points</span></label>
+                        <label for="q5d">I want to design AI solutions that solve big challenges.</label>
                     </div>
                     <div class="option">
                         <input type="radio" name="q5" value="5" id="q5e">
-                        <label for="q5e">I want to pioneer strategy and advanced techniques. <span class="point-badge">5 points</span></label>
+                        <label for="q5e">I want to pioneer strategy and advanced techniques.</label>
                     </div>
                 </div>
             </div>
@@ -566,15 +545,10 @@
         <!-- Results Page -->
         <div class="results" id="results">
             <h2 id="trackName"></h2>
-            <div class="score-display">
-                <h3>Your Score</h3>
-                <div class="score-number" id="finalScore"></div>
-                <div style="color: #666; font-size: 0.9em; margin-top: 5px;">out of 25 points</div>
-            </div>
             <p id="trackDescription"></p>
-            <a class="get-started-btn" id="getStartedLink" href="#" target="_blank">🚀 Get Started</a>
+            <a class="get-started-btn" id="getStartedLink" href="#" target="_blank">Get Started</a>
             <br>
-            <button class="restart-btn" onclick="restartQuiz()">↻ Take Quiz Again</button>
+            <button class="restart-btn" onclick="restartQuiz()">Take Quiz Again</button>
         </div>
     </div>
 
@@ -605,50 +579,60 @@
         };
 
         let currentProgress = 0;
+        let currentQuestionIndex = 1;
         const totalQuestions = 5;
 
         // Add event listeners to all radio buttons
         document.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                updateProgress();
-                checkAllAnswered();
+                setTimeout(() => {
+                    nextQuestion();
+                }, 800); // Delay to show selection animation
             });
         });
 
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions) {
+                // Hide current question
+                document.getElementById(`question${currentQuestionIndex}`).classList.remove('active');
+                
+                // Move to next question
+                currentQuestionIndex++;
+                updateProgress();
+                
+                setTimeout(() => {
+                    document.getElementById(`question${currentQuestionIndex}`).classList.add('active');
+                }, 300);
+            } else {
+                // All questions completed
+                updateProgress();
+                setTimeout(() => {
+                    showResults();
+                }, 1500);
+            }
+        }
+
         function updateProgress() {
-            const answered = [];
-            for (let i = 1; i <= totalQuestions; i++) {
-                if (document.querySelector(`input[name="q${i}"]:checked`)) {
-                    answered.push(i);
-                }
+            currentProgress = currentQuestionIndex - 1;
+            if (currentQuestionIndex > totalQuestions) {
+                currentProgress = totalQuestions;
             }
             
-            currentProgress = answered.length;
             const percentage = (currentProgress / totalQuestions) * 100;
-            
             document.getElementById('progressBar').style.width = percentage + '%';
             
             if (currentProgress === 0) {
-                document.getElementById('progressText').textContent = 'Ready to start? Answer the questions below! 🚀';
+                document.getElementById('progressText').textContent = 'Ready to start? Answer the questions below!';
             } else if (currentProgress < totalQuestions) {
-                document.getElementById('progressText').textContent = `Great progress! ${currentProgress} of ${totalQuestions} questions completed 📊`;
+                document.getElementById('progressText').textContent = `Question ${currentProgress + 1} of ${totalQuestions}`;
             } else {
-                document.getElementById('progressText').textContent = 'All done! Calculating your perfect AI track... ✨';
+                document.getElementById('progressText').textContent = 'All done! Calculating your perfect AI track...';
             }
         }
 
         function checkAllAnswered() {
-            const q1 = document.querySelector('input[name="q1"]:checked');
-            const q2 = document.querySelector('input[name="q2"]:checked');
-            const q3 = document.querySelector('input[name="q3"]:checked');
-            const q4 = document.querySelector('input[name="q4"]:checked');
-            const q5 = document.querySelector('input[name="q5"]:checked');
-            
-            if (q1 && q2 && q3 && q4 && q5) {
-                setTimeout(() => {
-                    showResults();
-                }, 1500); // Delay to show completion message
-            }
+            // This function is no longer needed since we auto-advance
+            return true;
         }
 
         function showResults() {
@@ -679,7 +663,6 @@
             document.getElementById('quiz-section').style.display = 'none';
             document.getElementById('results').style.display = 'block';
             document.getElementById('trackName').textContent = track;
-            document.getElementById('finalScore').textContent = totalScore;
             document.getElementById('trackDescription').textContent = tracks[track].description;
             document.getElementById('getStartedLink').href = tracks[track].url;
             
@@ -716,7 +699,14 @@
                 radio.checked = false;
             });
             
+            // Reset to first question
+            document.querySelectorAll('.question-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            document.getElementById('question1').classList.add('active');
+            
             // Reset progress
+            currentQuestionIndex = 1;
             currentProgress = 0;
             updateProgress();
             
